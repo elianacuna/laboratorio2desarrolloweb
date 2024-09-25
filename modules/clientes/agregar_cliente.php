@@ -76,7 +76,7 @@ include_once '../../includes/conexion.php';
         const alertError = document.getElementById('alertError');
         alertError.style.display = 'none';
       }
-        form.classList.add('was-validated'); 
+        form.classList.add('was-validated'); // Agrega clase para mostrar los estilos de validación
     }
     const form = document.getElementById('miFormulario');
     form.addEventListener('submit', validarFormulario);

@@ -22,7 +22,7 @@ include_once 'includes/conexion.php';
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="cliente.php">Cliente</a>
         <a class="nav-link active" aria-current="page" href="producto.php">Producto</a>
-        <a class="nav-link active" aria-current="page" href="#">Factura</a>
+        <a class="nav-link active" aria-current="page" href="venta.php">Venta</a>
 
       </div>
     </div>
