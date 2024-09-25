@@ -6,7 +6,7 @@ CREATE TABLE Clientes(
 );
 
 CREATE TABLE Producto(
-    codigo      int primary key,
+    codigo      int primary key auto_increment,
     descripcion varchar(250) not null,
     observaciones varchar(255),
     precio      double not null

@@ -2,25 +2,25 @@
 // Conexion a la base de datos
 include_once '../../includes/conexion.php'; 
 
-// variables para los datos del cliente
+// variables para los datos del producto
 $codigo = "";
-$nombre = "";
-$telefono = "";
-$correo = "";
+$desc = "";
+$obse = "";
+$precio = "";
 
 if (isset($_GET['codigo'])) {
     $codigo = $_GET['codigo'];
 
-    // Consulta para obtener los datos del cliente
-    $sql = "SELECT nombre, telefono, correo FROM clientes WHERE codigo = ?";
+    // Consulta para obtener los datos del producto
+    $sql = "SELECT descripcion, observaciones, precio FROM Producto WHERE codigo = ?";
     $stmt = mysqli_prepare($conexion, $sql);
     mysqli_stmt_bind_param($stmt, 'i', $codigo);
     
     if (mysqli_stmt_execute($stmt)) {
-        mysqli_stmt_bind_result($stmt, $nombre, $telefono, $correo);
+        mysqli_stmt_bind_result($stmt, $desc, $obse, $precio);
         mysqli_stmt_fetch($stmt);  
     } else {
-        echo "<script>alert('Error al obtener los datos del cliente');</script>";
+        echo "<script>alert('Error al obtener los datos del producto');</script>";
     }
 
     mysqli_stmt_close($stmt);
@@ -43,22 +43,22 @@ if (isset($_GET['codigo'])) {
         
         <form action="" method="POST" novalidate>
             <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>" required>
+                <label for="observacion" class="form-label">Observacion</label>
+                <input type="text" class="form-control" id="observacion" name="observacion" value="<?php echo htmlspecialchars($obse); ?>" required>
             </div>
             <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" value="<?php echo htmlspecialchars($telefono); ?>" required>
+                <label for="precio" class="form-label">Precio</label>
+                <input type="text" class="form-control" id="precio" name="precio" value="<?php echo htmlspecialchars($precio); ?>" required>
             </div>
             <div class="mb-3">
-                <label for="correo" class="form-label">Correo electrónico</label>
-                <input type="email" class="form-control" id="correo" name="correo" value="<?php echo htmlspecialchars($correo); ?>" required>
+                <label for="descripcion" class="form-label">Descripcion</label>
+                <input type="text" class="form-control" id="descripcion" name="descripcion" value="<?php echo htmlspecialchars($desc); ?>" required>
             </div>
             
             <input type="hidden" name="codigo" value="<?php echo $codigo; ?>">
 
-            <button type="submit" class="btn btn-primary">Actualizar Cliente</button>
-            <a href="../../cliente.php" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Actualizar Prodcuto</button>
+            <a href="../../producto.php" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
 
@@ -76,22 +76,22 @@ function actualizarCliente(){
     global $conexion;
 
     $codigo = $_POST['codigo'];
-    $nombre = $_POST['nombre'];
-    $telefono = $_POST['telefono'];
-    $correo = $_POST['correo'];
+    $desc = $_POST['descripcion'];
+    $obse = $_POST['observacion'];
+    $precio = $_POST['precio'];
 
-    // Consulta para actualizar los datos del cliente
-    $sql = "UPDATE clientes SET nombre = ?, telefono = ?, correo = ? WHERE codigo = ?";
+    // Consulta para actualizar los datos del producto
+    $sql = "UPDATE Producto SET descripcion = ?, precio = ?, observaciones = ? WHERE codigo = ?";
     $stmt = mysqli_prepare($conexion, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssi', $nombre, $telefono, $correo, $codigo);
+    mysqli_stmt_bind_param($stmt, 'sssi', $desc, $precio, $obse, $codigo);
     
     if (mysqli_stmt_execute($stmt)) {
-        echo "<script>alert('Cliente actualizado correctamente');</script>";
+        echo "<script>alert('Productp actualizado correctamente');</script>";
 
-        header("Location: ../../cliente.php");
+        header("Location: ../../producto.php");
         exit();
     } else {
-        echo "<script>alert('Error al actualizar el cliente');</script>";
+        echo "<script>alert('Error al actualizar el producto');</script>";
     }
 
     mysqli_stmt_close($stmt);

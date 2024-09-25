@@ -1,13 +1,13 @@
 <?php
-// Incluir el archivo de configuración
+// Incluir el archivo de configuración con las credenciales
 require_once 'config.php';
 
 // Función para conectarse a la base de datos
 function conectarDB() {
-    // Crear la conexión usando los valores definidos en config.php
-    $conexion = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
+    // Crear la conexión usando las constantes definidas en config.php
+    $conexion = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_PORT);
 
-    // Comprobar si la conexión fue exitosa
+    // Verificar si la conexión fue exitosa
     if ($conexion->connect_error) {
         die("Error de conexión: " . $conexion->connect_error);
     }
@@ -16,13 +16,6 @@ function conectarDB() {
     return $conexion;
 }
 
-// Llamada a la función para verificar si funciona correctamente
+// Establecer la conexión
 $conexion = conectarDB();
-
-// Puedes comprobar si la conexión fue exitosa
-if ($conexion) {
-    //echo "Conexión exitosa a la base de datos " . DB_NAME;
-} else {
-    echo "Error de conexión.";
-}
 ?>
