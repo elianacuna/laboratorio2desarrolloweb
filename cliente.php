@@ -75,7 +75,7 @@ $resultado = mysqli_query($conexion, $sql);
 </html>
 
 <?php
-// Cerrar la conexión
+
 mysqli_close($conexion);
 ?>
 

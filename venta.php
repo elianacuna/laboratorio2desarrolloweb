@@ -6,8 +6,9 @@ include_once 'includes/conexion.php';
 include_once 'index.php';
 
 // Realizar la consulta a la base de datos
-$sql = "SELECT f.codigo, f.cliente, f.fecha, f.monto, df.producto, df.cantidad, df.subtotal FROM factura f 
-INNER JOIN detalle_factura df ON f.codigo = df.factura;";
+$sql = "SELECT f.codigo, f.cliente, f.fecha, f.monto, p.descripcion, df.cantidad, df.subtotal FROM factura f 
+INNER JOIN detalle_factura df ON f.codigo = df.factura
+INNER JOIN producto p ON p.codigo = df.producto;";
 $resultado = mysqli_query($conexion, $sql); 
 
 ?>
@@ -53,9 +54,17 @@ $resultado = mysqli_query($conexion, $sql);
                         echo "<td>" . $fila['cliente'] . "</td>";
                         echo "<td>" . $fila['fecha'] . "</td>";
                         echo "<td>" . $fila['monto'] . "</td>";
-                        echo "<td>" . $fila['producto'] . "</td>";
+                        echo "<td>" . $fila['descripcion'] . "</td>";
                         echo "<td>" . $fila['cantidad'] . "</td>";
                         echo "<td>" . $fila['subtotal'] . "</td>";
+                        echo "<td>";
+                        ?>
+                        <a href="pdf/factura.php?codigo=<?php echo $fila['codigo']; ?>" class="btn btn-danger">
+                            Ver PDF
+                        </a>
+                        <?php
+                        echo "</td>";
+                        
                         echo "<td>";
                         ?>
                         <div class="dropdown">
