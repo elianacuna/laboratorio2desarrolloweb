@@ -21,7 +21,7 @@ $conexion = conectarDB();
 
 // Puedes comprobar si la conexión fue exitosa
 if ($conexion) {
-    echo "Conexión exitosa a la base de datos " . DB_NAME;
+    //echo "Conexión exitosa a la base de datos " . DB_NAME;
 } else {
     echo "Error de conexión.";
 }
